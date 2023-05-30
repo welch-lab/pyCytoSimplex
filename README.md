@@ -14,7 +14,7 @@ For latest developmental version, please make sure that you have a Python (>=3.7
 1. Download this package
 
 ```shell
-git clone xxx
+git clone https://github.com/mvfki/pyPlotSimplex.git
 cd pyPlotSimplex
 ```
 
