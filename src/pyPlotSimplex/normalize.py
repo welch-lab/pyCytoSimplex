@@ -1,13 +1,15 @@
 from sklearn.preprocessing import normalize
 from anndata import AnnData
 
+
 def row_normalize(x):
     """
         Normalize the rows of a matrix by l1 norm.
         Parameters
         ----------
         x : AnnData, where x.X will be normalized.
-            numpy.ndarray, or scipy.sparse.csr_matrix, The matrix to be normalized.
+            numpy.ndarray, or scipy.sparse.csr_matrix, The matrix to be
+                normalized.
 
         Returns
         -------

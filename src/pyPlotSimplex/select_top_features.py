@@ -8,6 +8,7 @@ from scipy import stats
 import statsmodels.stats.multitest as smt
 from anndata import AnnData
 
+
 def select_top_features(
         X,
         cluster_var,
@@ -20,7 +21,8 @@ def select_top_features(
         feature_names = X.var_names
     else:
         feature_names = np.arange(X.shape[1])
-    mat, grouping, vertices, cluster_var = _check_cluster_vertices(X, cluster_var, vertices)
+    mat, grouping, vertices, cluster_var = \
+        _check_cluster_vertices(X, cluster_var, vertices)
     if not processed:
         mat = row_normalize(mat)
         mat = np.log1p(1e10*mat)
@@ -37,6 +39,7 @@ def select_top_features(
         sub = sub.sort_values(['padj', 'logFC'], ascending=[True, False])
         selected.extend(sub['feature'].values[:n_top])
     return selected
+
 
 def wilcoxon(X, y):
     """
@@ -56,7 +59,9 @@ def wilcoxon(X, y):
     ties = [_count_ties(rank_mat[i]) for i in range(rank_mat.shape[0])]
     n1n2 = group_size * (X.shape[0] - group_size)
     pvals = _compute_pval(ustats, ties, X.shape[0], n1n2)
-    fdr = np.apply_along_axis(lambda y: smt.multipletests(y, method='fdr_bh')[1], 0, pvals)
+    fdr = np.apply_along_axis(
+        lambda y: smt.multipletests(y, method='fdr_bh')[1], 0, pvals
+    )
 
     # Calculate Auxiliary Statistics
     group_sums = np.zeros((len(y.cat.categories), X.shape[1]))
@@ -82,12 +87,14 @@ def wilcoxon(X, y):
     })
     return final
 
+
 def _count_ties(rank_mat):
     """
     rank_mat - 1D array, length m features
     """
     _, counts = np.unique(rank_mat, return_counts=True)
     return counts[counts > 1]
+
 
 def _compute_ustats(X, y, group_size):
     """
@@ -100,6 +107,7 @@ def _compute_ustats(X, y, group_size):
     rhs = group_size * (group_size + 1) / 2
     ustat = sums - rhs
     return ustat
+
 
 def _compute_pval(ustats, ties, N, n1n2):
     z = ustats - np.array([n1n2/2]).T

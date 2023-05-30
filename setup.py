@@ -5,14 +5,16 @@ setup(
     version='0.1.0',
     author=['Yichen Wang', 'Jialin Liu'],
     author_email='wayichen@umich.edu',
-    description='pyPlotSimplex is module that creates simplex plot showing similarity between single-cells and clusters, while being able to add velocity as another layer of information',
+    description="""pyPlotSimplex is module that creates simplex plot showing
+                   similarity between single-cells and clusters, while being
+                   able to add velocity as another layer of information""",
     # long_description='A longer description of your project',
     long_description_content_type='text/markdown',
     url='https://github.com/mvfki/pyPlotSimplex',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     install_requires=[
-        'sklearn'
+        'sklearn',
         'numpy',
         'anndata',
         'scipy',
