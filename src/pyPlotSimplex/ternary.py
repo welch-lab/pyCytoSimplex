@@ -127,6 +127,9 @@ def plot_ternary(
     -------
     None. Figure will be shown or saved.
     """
+    # Useless call of mpltern function to avoid warning.
+    mpltern_np_ver = mpltern.version("numpy")
+    del mpltern_np_ver
     mat, grouping, vertices, original_cluster = \
         _check_cluster_vertices(X, cluster_var, vertices, n=3)
     if not processed:
