@@ -5,7 +5,6 @@ import pandas as pd
 from scipy.stats import rankdata
 from scipy.sparse import csr_matrix
 from scipy import stats
-import statsmodels.stats.multitest as smt
 from anndata import AnnData
 
 
@@ -59,9 +58,7 @@ def wilcoxon(X, y):
     ties = [_count_ties(rank_mat[i]) for i in range(rank_mat.shape[0])]
     n1n2 = group_size * (X.shape[0] - group_size)
     pvals = _compute_pval(ustats, ties, X.shape[0], n1n2)
-    fdr = np.apply_along_axis(
-        lambda y: smt.multipletests(y, method='fdr_bh')[1], 0, pvals
-    )
+    fdr = _compute_fdr(pvals)
 
     # Calculate Auxiliary Statistics
     group_sums = np.zeros((len(y.cat.categories), X.shape[1]))
@@ -90,7 +87,7 @@ def wilcoxon(X, y):
 
 def _count_ties(rank_mat):
     """
-    rank_mat - 1D array, length m features
+    rank_mat - 1D array, length n cells
     """
     _, counts = np.unique(rank_mat, return_counts=True)
     return counts[counts > 1]
@@ -119,4 +116,11 @@ def _compute_pval(ustats, ties, N, n1n2):
     usigma = np.sqrt(usigma)
     z = z / usigma
     pvals = 2 * stats.norm.cdf(-np.abs(z))
-    return pvals
+    return pvals[0]
+
+
+def _compute_fdr(p_vals):
+    ranked_p_values = rankdata(p_vals, axis=1)
+    fdr = p_vals * p_vals.shape[1] / ranked_p_values
+    fdr[fdr > 1] = 1
+    return fdr

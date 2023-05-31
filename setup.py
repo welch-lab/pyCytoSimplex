@@ -19,7 +19,6 @@ setup(
         'anndata',
         'scipy',
         'pandas',
-        'statsmodels',
         'matplotlib',
         'mpltern'
     ],
