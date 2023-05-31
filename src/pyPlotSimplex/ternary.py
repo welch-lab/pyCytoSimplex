@@ -1,8 +1,9 @@
 from .similarity import calc_sim
 from .normalize import row_normalize
-from .util import _check_cluster_vertices
-from .velo_grid import aggregate_vertex_velo, aggregate_grid_velo
+from .util import _check_cluster_vertices, TRIANGLE_VERTICES
+from .velo_grid import aggregate_vertex_velo, aggregate_grid_velo, _cart2bary
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import mpltern
 import math
@@ -232,18 +233,26 @@ def _add_ternary_subplot(
                s=dot_size, color=dot_color)
 
     if velo_mat is not None:
-        grid_bary, arrow_vec = aggregate_grid_velo(sim_mat, velo_mat,
+        grid_cart, arrow_vec = aggregate_grid_velo(sim_mat, velo_mat,
                                                    n_grid=n_velogrid,
                                                    radius=radius)
+        grid_bary = _cart2bary(TRIANGLE_VERTICES, grid_cart)
+        grid_bary = pd.DataFrame(grid_bary, index=grid_cart.index,
+                                 columns=sim_mat.columns)
         for i, vec in enumerate(arrow_vec):
-            arrow_select = np.sqrt((vec**2).sum(1)) > 1e-2
+            arrow_end_bary = _cart2bary(TRIANGLE_VERTICES, vec)
+            arrow_end_bary = pd.DataFrame(arrow_end_bary,
+                                          index=vec.index,
+                                          columns=sim_mat.columns)
+            arrow_distence_bary = arrow_end_bary - grid_bary
+            arrow_select = np.sqrt((arrow_distence_bary**2).sum(1)) > 1e-2
             if arrow_select.sum() > 0:
                 ax.quiver(grid_bary.loc[arrow_select, t_label],
                           grid_bary.loc[arrow_select, l_label],
                           grid_bary.loc[arrow_select, r_label],
-                          vec.loc[arrow_select, t_label],
-                          vec.loc[arrow_select, l_label],
-                          vec.loc[arrow_select, r_label],
+                          arrow_end_bary.loc[arrow_select, t_label],
+                          arrow_end_bary.loc[arrow_select, l_label],
+                          arrow_end_bary.loc[arrow_select, r_label],
                           color=vertex_colors[i],
                           width=arrow_linewidth)
 
@@ -252,10 +261,10 @@ def _add_ternary_subplot(
     ax.tick_params(axis='r', colors=vertex_colors[2])
 
     ax.set_llabel(l_label, color=vertex_colors[0],
-                  fontweight='bold', fontsize=vertex_label_size)
+                  fontsize=vertex_label_size)
     ax.set_tlabel(t_label, color=vertex_colors[1],
-                  fontweight='bold', fontsize=vertex_label_size)
+                  fontsize=vertex_label_size)
     ax.set_rlabel(r_label, color=vertex_colors[2],
-                  fontweight='bold', fontsize=vertex_label_size)
+                  fontsize=vertex_label_size)
 
     ax.set_title(title)

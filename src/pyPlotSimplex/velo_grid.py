@@ -63,26 +63,12 @@ def aggregate_grid_velo(sim_mat, velo_mat, n_grid=10, radius=0.1):
     grid_velo = grid_velo.loc[grid_to_keep, :]
     grid_cart = grid_cart.loc[grid_to_keep, :]
 
-    grid_bary = _cart2bary(simplex, grid_cart)
-    grid_bary = pd.DataFrame(grid_bary, index=grid_cart.index,
-                             columns=sim_mat.columns)
-
     # Get the arrow end points
     arrow_vec = []
     for i, v in enumerate(grid_velo.columns):
-        arrow_end_cart = _get_arrow_end(grid_cart, np.array(simplex.loc[i]),
-                                        grid_velo.iloc[:, i]*radius)
-        arrow_end_bary = _cart2bary(simplex, arrow_end_cart)
-        arrow_vec.append(
-            pd.DataFrame(arrow_end_bary - grid_bary,
-                         index=grid_cart.index,
-                         columns=sim_mat.columns)
-        )
-    # TODO: Find a better return type
-    # Ternary plot takes barycentric coordinates as input, and arrow distance
-    # vector in barycentric space.
-    # However, for quaternary plot, we can only use cartesian coordinates.
-    return grid_bary, arrow_vec
+        arrow_vec.append(_get_arrow_end(grid_cart, np.array(simplex.loc[i]),
+                                        grid_velo.iloc[:, i]*radius))
+    return grid_cart, arrow_vec
 
 
 def _cart2bary(X, P):

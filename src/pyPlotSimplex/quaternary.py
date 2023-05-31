@@ -29,12 +29,12 @@ def plot_quaternary(
           cluster_title=True,
           dot_color="#8E8E8EFF",
           n_velogrid=10,
-          radius=0.08,
+          radius=0.16,
           dot_size=0.6,
           vertex_colors=["#3B4992FF", "#EE0000FF", "#008B45FF", "#631879FF"],
           vertex_label_size=12,
           gridline_alpha=0.4,
-          arrow_linewidth=0.004
+          arrow_linewidth=1
           ):
     """
     Create ternary plot that shows the similarity between each single cell and
@@ -116,10 +116,8 @@ def plot_quaternary(
             respectively for left, top, and right vertices.
     vertex_label_size : int
         The size of the vertex labels. Default: 12.
-    gridline_alpha : float
-        The alpha of the gridlines. Default: 0.4.
     arrow_linewidth : float
-        The linewidth of the arrows. Default: 0.004.
+        The linewidth of the arrows. Default: 1.
 
     Returns
     -------
@@ -155,7 +153,6 @@ def plot_quaternary(
                                 radius=radius, dot_size=dot_size,
                                 vertex_colors=vertex_colors, title=title,
                                 vertex_label_size=vertex_label_size,
-                                gridline_alpha=gridline_alpha,
                                 arrow_linewidth=arrow_linewidth)
     else:
         cats = original_cluster.cat.categories
@@ -181,7 +178,6 @@ def plot_quaternary(
                 radius=radius, dot_size=dot_size,
                 vertex_colors=vertex_colors,
                 vertex_label_size=vertex_label_size,
-                gridline_alpha=gridline_alpha,
                 arrow_linewidth=arrow_linewidth
             )
             if cluster_title:
@@ -192,7 +188,6 @@ def plot_quaternary(
                                 dot_size=dot_size, dot_color=dot_color,
                                 vertex_colors=vertex_colors,
                                 vertex_label_size=vertex_label_size,
-                                gridline_alpha=gridline_alpha,
                                 arrow_linewidth=arrow_linewidth)
         if cluster_title:
             ax.set_title("All cells", pad=10)
@@ -209,28 +204,39 @@ def _add_quaternary_subplot(
         velo_mat=None,
         title=None,
         n_velogrid=10,
-        radius=0.08,
+        radius=0.16,
         dot_size=0.6,
         dot_color="#8E8E8EFF",
         vertex_colors=["#3B4992FF", "#EE0000FF", "#008B45FF", "#631879FF"],
         vertex_label_size=12,
-        gridline_alpha=0.4,
-        arrow_linewidth=0.004
+        arrow_linewidth=1
 ):
     simplex = TETRA_VERTICES
     segment_pairs = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]]
     for pair in segment_pairs:
         ax.plot(simplex.iloc[pair, 0], simplex.iloc[pair, 1],
-                simplex.iloc[pair, 2], color='black', lw=1)
+                simplex.iloc[pair, 2], color='black', lw=0.5)
     for i in range(4):
         ax.text(simplex.iloc[i, 0], simplex.iloc[i, 1], simplex.iloc[i, 2],
-                s=sim_mat.columns[i], c=vertex_colors[i])
+                s=sim_mat.columns[i], c=vertex_colors[i],
+                fontsize=vertex_label_size)
     sim_cart = pd.DataFrame(np.dot(sim_mat, simplex), index=sim_mat.index,
                             columns=simplex.columns)
     ax.scatter(sim_cart['x'], sim_cart['y'], sim_cart['z'], s=dot_size,
                c=dot_color, alpha=0.8, edgecolors='none')
     if velo_mat is not None:
-        grid, arrow = aggregate_grid_velo(sim_mat, velo_mat, n_grid=n_velogrid,
-                                          radius=radius)
-        # TODO, see velo_grid.py
+        grid_cart, arrow_vec = aggregate_grid_velo(sim_mat, velo_mat,
+                                                   n_grid=n_velogrid,
+                                                   radius=radius)
+        for i, vec in enumerate(arrow_vec):
+            arrow_dist = vec - grid_cart
+            ax.quiver(grid_cart.loc[:, 'x'],
+                      grid_cart.loc[:, 'y'],
+                      grid_cart.loc[:, 'z'],
+                      arrow_dist.loc[:, 'x'],
+                      arrow_dist.loc[:, 'y'],
+                      arrow_dist.loc[:, 'z'],
+                      color=vertex_colors[i],
+                      lw=arrow_linewidth)
     ax.set_axis_off()
+    ax.set_title(title, pad=10)
