@@ -62,7 +62,6 @@ def aggregate_grid_velo(sim_mat, velo_mat, n_grid=10, radius=0.1):
     grid_to_keep = grid_velo.sum(1) > 0
     grid_velo = grid_velo.loc[grid_to_keep, :]
     grid_cart = grid_cart.loc[grid_to_keep, :]
-
     # Get the arrow end points
     arrow_vec = []
     for i, v in enumerate(grid_velo.columns):
@@ -96,6 +95,8 @@ def _get_arrow_end(starts, target, length):
     length: vector of arrow lengths, each element corresponds to one start
             point
     """
+    if starts.shape[0] == 0:
+        return starts
     V = np.array([target for i in range(starts.shape[0])])
     vec_SV = V - starts
     len_SV = np.sqrt(np.sum(vec_SV**2, axis=1))

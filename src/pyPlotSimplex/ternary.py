@@ -239,25 +239,26 @@ def _add_ternary_subplot(
         grid_cart, arrow_vec = aggregate_grid_velo(sim_mat, velo_mat,
                                                    n_grid=n_velogrid,
                                                    radius=radius)
-        grid_bary = _cart2bary(TRIANGLE_VERTICES, grid_cart)
-        grid_bary = pd.DataFrame(grid_bary, index=grid_cart.index,
-                                 columns=sim_mat.columns)
-        for i, vec in enumerate(arrow_vec):
-            arrow_end_bary = _cart2bary(TRIANGLE_VERTICES, vec)
-            arrow_end_bary = pd.DataFrame(arrow_end_bary,
-                                          index=vec.index,
-                                          columns=sim_mat.columns)
-            arrow_distence_bary = arrow_end_bary - grid_bary
-            arrow_select = np.sqrt((arrow_distence_bary**2).sum(1)) > 1e-2
-            if arrow_select.sum() > 0:
-                ax.quiver(grid_bary.loc[arrow_select, t_label],
-                          grid_bary.loc[arrow_select, l_label],
-                          grid_bary.loc[arrow_select, r_label],
-                          arrow_end_bary.loc[arrow_select, t_label],
-                          arrow_end_bary.loc[arrow_select, l_label],
-                          arrow_end_bary.loc[arrow_select, r_label],
-                          color=vertex_colors[i],
-                          width=arrow_linewidth)
+        if grid_cart.shape[0] > 0:
+            grid_bary = _cart2bary(TRIANGLE_VERTICES, grid_cart)
+            grid_bary = pd.DataFrame(grid_bary, index=grid_cart.index,
+                                     columns=sim_mat.columns)
+            for i, vec in enumerate(arrow_vec):
+                arrow_end_bary = _cart2bary(TRIANGLE_VERTICES, vec)
+                arrow_end_bary = pd.DataFrame(arrow_end_bary,
+                                              index=vec.index,
+                                              columns=sim_mat.columns)
+                arrow_distence_bary = arrow_end_bary - grid_bary
+                arrow_select = np.sqrt((arrow_distence_bary**2).sum(1)) > 1e-2
+                if arrow_select.sum() > 0:
+                    ax.quiver(grid_bary.loc[arrow_select, t_label],
+                              grid_bary.loc[arrow_select, l_label],
+                              grid_bary.loc[arrow_select, r_label],
+                              arrow_end_bary.loc[arrow_select, t_label],
+                              arrow_end_bary.loc[arrow_select, l_label],
+                              arrow_end_bary.loc[arrow_select, r_label],
+                              color=vertex_colors[i],
+                              width=arrow_linewidth)
 
     ax.tick_params(axis='l', colors=vertex_colors[0])
     ax.tick_params(axis='t', colors=vertex_colors[1])
