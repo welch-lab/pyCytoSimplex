@@ -1,5 +1,7 @@
 <img src="https://github.com/mvfki/scPlotSimplex/raw/main/man/figures/logo.png" width="120">
 
+[![Python3_10_test](https://github.com/mvfki/pyPlotSimplex/actions/workflows/python-package.yml/badge.svg)](https://github.com/mvfki/pyPlotSimplex/actions/workflows/python-package.yml)[![codecov](https://codecov.io/gh/mvfki/pyPlotSimplex/branch/main/graph/badge.svg?token=L839lYPVon)](https://codecov.io/gh/mvfki/pyPlotSimplex)
+
 # pyPlotSimplex
 
 "pyPlotSimplex" is a Python module that creates simplex plot showing similarity between single-cells and terminals represented by clusters of cells.
