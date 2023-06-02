@@ -38,7 +38,8 @@ def plot_quaternary(
           ):
     """
     Create ternary plot that shows the similarity between each single cell and
-    the three vertices of a simplex which represents specified clusters.
+    the four vertices of a simplex (tetrahedron) which represents specified
+    clusters. Velocity information can be added to the plot.
 
     Parameters
     ----------
@@ -110,10 +111,9 @@ def plot_quaternary(
             0.08.
     dot_size : float
         The size of the dots. Default: 0.6.
-    vertex_colors : list of three str
+    vertex_colors : list of two str
         The colors of the vertex labels, grid lines, axis labels and arrows.
-            Default: `["#3B4992FF", "#EE0000FF", "#008B45FF", "#631879FF"]`,
-            respectively for left, top, and right vertices.
+            Default: `["#3B4992FF", "#EE0000FF", "#008B45FF", "#631879FF"]`.
     vertex_label_size : int
         The size of the vertex labels. Default: 12.
     arrow_linewidth : float

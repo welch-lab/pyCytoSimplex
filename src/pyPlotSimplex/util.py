@@ -41,7 +41,15 @@ def _check_cluster_vertices(x, cluster_var, vertices, n=None):
         The terminal specifications of the simplex.
     """
     if n is not None:
-        if len(vertices) != n:
+        if len(vertices) > n:
+            print(f"WARNING: Detected more than {n} vertices "
+                  f"({len(vertices)}). Using the first {n} vertices.")
+            if isinstance(vertices, list):
+                vertices = vertices[:n]
+            elif isinstance(vertices, dict):
+                keys = list(vertices.keys())[:n]
+                vertices = {key: vertices[key] for key in keys}
+        if len(vertices) < n:
             raise ValueError(f"Must specify {n} vertices.")
 
     # Obtain the number of observations. and check input type.

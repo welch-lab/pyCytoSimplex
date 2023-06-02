@@ -38,7 +38,8 @@ def plot_ternary(
           ):
     """
     Create ternary plot that shows the similarity between each single cell and
-    the three vertices of a simplex which represents specified clusters.
+    the three vertices of a simplex (equilateral triangle) which represents
+    specified clusters. Velocity information can be added to the plot.
 
     Parameters
     ----------
@@ -86,7 +87,7 @@ def plot_ternary(
         When "pearson" or "spearman", the similarity is derived as the
             correlation is.
     force : bool
-        Whether to force the calculation when the number of features exists
+        Whether to force the calculation when the number of features exceeds
             500. Default: False.
     sigma : float
         The sigma parameter in the Gaussian kernel. Default: 0.08.
