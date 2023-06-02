@@ -1,6 +1,6 @@
 <img src="https://github.com/mvfki/scPlotSimplex/raw/main/man/figures/logo.png" width="120">
 
-[![Python3_10_test](https://github.com/mvfki/pyPlotSimplex/actions/workflows/python-package.yml/badge.svg)](https://github.com/mvfki/pyPlotSimplex/actions/workflows/python-package.yml)[![codecov](https://codecov.io/gh/mvfki/pyPlotSimplex/branch/main/graph/badge.svg?token=L839lYPVon)](https://codecov.io/gh/mvfki/pyPlotSimplex)
+[![Python3_10_test](https://github.com/mvfki/pyPlotSimplex/actions/workflows/python-package.yml/badge.svg)](https://github.com/mvfki/pyPlotSimplex/actions/workflows/python-package.yml)[![codecov](https://codecov.io/gh/mvfki/pyPlotSimplex/branch/main/graph/badge.svg?token=L839lYPVon)](https://codecov.io/gh/mvfki/pyPlotSimplex)[![AnnData-0.9.1](https://img.shields.io/badge/AnnData-0.9.1-blue)](https://pypi.org/project/anndata/)
 
 # pyPlotSimplex
 
