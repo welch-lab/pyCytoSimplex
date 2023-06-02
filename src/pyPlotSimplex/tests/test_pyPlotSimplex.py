@@ -7,7 +7,8 @@ from pyPlotSimplex import row_normalize, select_top_features, \
 import matplotlib.pyplot as plt
 from unittest.mock import patch
 
-adata = sc.read_h5ad("src/pyPlotSimplex/tests/bmmc_rna_small.h5ad")
+adata = sc.read(filename='test.h5ad',
+                backup_url="https://figshare.com/ndownloader/files/41034857")
 
 VT_BIN = {'OS': ["Osteoblast_1", "Osteoblast_2", "Osteoblast_3"],
           'RE': ['Reticular_1', 'Reticular_2']}
