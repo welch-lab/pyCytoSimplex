@@ -50,7 +50,7 @@ def aggregate_grid_velo(sim_mat, velo_mat, n_grid=10, radius=0.1):
 
     # Aggregate velocity by grid, comparing cell cartesian coordinate
     grid_velo = pd.DataFrame(0, index=grid_cart.index,
-                             columns=velo_mat.columns)
+                             columns=velo_mat.columns, dtype=float)
     for i in range(grid_cart.shape[0]):
         cell_sel = pd.Series(True, index=cell_cart.index)
         for j in range(cell_cart.shape[1]):
