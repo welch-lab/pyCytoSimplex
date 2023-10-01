@@ -33,6 +33,7 @@ def plot_ternary(
           dot_size=0.6,
           vertex_colors=["#3B4992FF", "#EE0000FF", "#008B45FF"],
           vertex_label_size=12,
+          axis_text_show=True,
           gridline_alpha=0.4,
           arrow_linewidth=0.004
           ):
@@ -119,6 +120,8 @@ def plot_ternary(
             for left, top, and right vertices.
     vertex_label_size : int
         The size of the vertex labels. Default: 12.
+    axis_text_show : bool
+        Whether to show the text along the axis. Default: True.
     gridline_alpha : float
         The alpha of the gridlines. Default: 0.4.
     arrow_linewidth : float
@@ -162,6 +165,7 @@ def plot_ternary(
                              vertex_colors=vertex_colors, title=title,
                              vertex_label_size=vertex_label_size,
                              gridline_alpha=gridline_alpha,
+                             axis_text_show=axis_text_show,
                              arrow_linewidth=arrow_linewidth)
     else:
         cats = original_cluster.cat.categories
@@ -187,6 +191,7 @@ def plot_ternary(
                 vertex_colors=vertex_colors,
                 vertex_label_size=vertex_label_size,
                 gridline_alpha=gridline_alpha,
+                axis_text_show=axis_text_show,
                 arrow_linewidth=arrow_linewidth
             )
             if cluster_title:
@@ -198,6 +203,7 @@ def plot_ternary(
                              vertex_colors=vertex_colors,
                              vertex_label_size=vertex_label_size,
                              gridline_alpha=gridline_alpha,
+                             axis_text_show=axis_text_show,
                              arrow_linewidth=arrow_linewidth)
         if cluster_title:
             ax.set_title("All cells", pad=10)
@@ -220,6 +226,7 @@ def _add_ternary_subplot(
         vertex_colors=["#3B4992FF", "#EE0000FF", "#008B45FF"],
         vertex_label_size=12,
         gridline_alpha=0.4,
+        axis_text_show=True,
         arrow_linewidth=0.004
         ):
     l_label = sim_mat.columns[0]
@@ -264,6 +271,13 @@ def _add_ternary_subplot(
     ax.tick_params(axis='l', colors=vertex_colors[0])
     ax.tick_params(axis='t', colors=vertex_colors[1])
     ax.tick_params(axis='r', colors=vertex_colors[2])
+
+    if not axis_text_show:
+        ax.laxis.set_ticklabels([])
+        ax.taxis.set_ticklabels([])
+        ax.raxis.set_ticklabels([])
+
+    ax.tick_params(tick1On=axis_text_show, tick2On=axis_text_show)
 
     ax.set_llabel(l_label, color=vertex_colors[0],
                   fontsize=vertex_label_size)

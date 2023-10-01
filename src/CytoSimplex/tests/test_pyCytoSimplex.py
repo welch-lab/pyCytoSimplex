@@ -122,7 +122,7 @@ def test_stdout_ternary(mock_show, capfd):
 @patch('matplotlib.pyplot.show')
 def test_ternary_single_wo_velo(mock_show):
     adata_test = adata.copy()
-    plot_ternary(adata_test, "cluster", VT_TER, GENE_TER)
+    plot_ternary(adata_test, "cluster", VT_TER, GENE_TER, axis_text_show=False)
     fig = plt.gcf()
     assert fig.axes[0].get_llabel() == 'OS'
 

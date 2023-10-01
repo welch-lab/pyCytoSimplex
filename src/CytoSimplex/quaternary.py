@@ -22,7 +22,7 @@ def plot_quaternary(
           processed=False,
           method="euclidean",
           force=False,
-          sigma=0.08,
+          sigma=0.05,
           scale=True,
           title=None,
           split_cluster=False,
@@ -33,7 +33,6 @@ def plot_quaternary(
           dot_size=0.6,
           vertex_colors=["#3B4992FF", "#EE0000FF", "#008B45FF", "#631879FF"],
           vertex_label_size=12,
-          gridline_alpha=0.4,
           arrow_linewidth=1
           ):
     """
@@ -88,7 +87,7 @@ def plot_quaternary(
         Whether to force the calculation when the number of features exceeds
             500. Default: False.
     sigma : float
-        The sigma parameter in the Gaussian kernel. Default: 0.08.
+        The sigma parameter in the Gaussian kernel. Default: 0.05.
     scale : bool
         Whether to scale the similarity matrix by vertices. Default: True.
     title : str
