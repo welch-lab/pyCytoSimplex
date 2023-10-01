@@ -1,5 +1,6 @@
-<img src="https://github.com/mvfki/CytoSimplex/raw/main/man/figures/logo.png" width="120">
+<img src="docs/logo.png" align="right" width="120" />
 
+# CytoSimplex 
 [![Python3_10_test](https://github.com/mvfki/pyCytoSimplex/actions/workflows/python-package.yml/badge.svg)](https://github.com/mvfki/pyCytoSimplex/actions/workflows/python-package.yml)[![codecov](https://codecov.io/gh/mvfki/pyCytoSimplex/branch/main/graph/badge.svg?token=L839lYPVon)](https://codecov.io/gh/mvfki/pyCytoSimplex)[![AnnData-0.9.1](https://img.shields.io/badge/AnnData-0.9.1-blue)](https://pypi.org/project/anndata/)
 
 # CytoSimplex
