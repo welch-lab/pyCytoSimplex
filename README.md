@@ -1,13 +1,13 @@
-<img src="https://github.com/mvfki/scPlotSimplex/raw/main/man/figures/logo.png" width="120">
+<img src="https://github.com/mvfki/CytoSimplex/raw/main/man/figures/logo.png" width="120">
 
-[![Python3_10_test](https://github.com/mvfki/pyPlotSimplex/actions/workflows/python-package.yml/badge.svg)](https://github.com/mvfki/pyPlotSimplex/actions/workflows/python-package.yml)[![codecov](https://codecov.io/gh/mvfki/pyPlotSimplex/branch/main/graph/badge.svg?token=L839lYPVon)](https://codecov.io/gh/mvfki/pyPlotSimplex)[![AnnData-0.9.1](https://img.shields.io/badge/AnnData-0.9.1-blue)](https://pypi.org/project/anndata/)
+[![Python3_10_test](https://github.com/mvfki/pyCytoSimplex/actions/workflows/python-package.yml/badge.svg)](https://github.com/mvfki/pyCytoSimplex/actions/workflows/python-package.yml)[![codecov](https://codecov.io/gh/mvfki/pyCytoSimplex/branch/main/graph/badge.svg?token=L839lYPVon)](https://codecov.io/gh/mvfki/pyCytoSimplex)[![AnnData-0.9.1](https://img.shields.io/badge/AnnData-0.9.1-blue)](https://pypi.org/project/anndata/)
 
-# pyPlotSimplex
+# CytoSimplex
 
-"pyPlotSimplex" is a Python module that creates simplex plot showing similarity between single-cells and terminals represented by clusters of cells.
+"CytoSimplex" is a Python module that creates simplex plot showing similarity between single-cells and terminals represented by clusters of cells.
 RNA velocity can be added as another layer of information.
 
-For R users, we have an R package [scPlotSimplex](https://github.com/mvfki/scPlotSimplex) that provides the same functionalities.
+For R users, we have an R package [CytoSimplex](https://github.com/mvfki/CytoSimplex) that provides the same functionalities.
 
 ## Installation
 
@@ -16,8 +16,8 @@ For latest developmental version, please make sure that you have a Python (>=3.7
 1. Download this package
 
 ```shell
-git clone https://github.com/mvfki/pyPlotSimplex.git
-cd pyPlotSimplex
+git clone https://github.com/mvfki/pyCytoSimplex.git
+cd pyCytoSimplex
 ```
 
 2. Make sure that all required dependencies are available and install as needed
@@ -37,7 +37,7 @@ python setup.py install
 Assume that users have a well annotated dataset, contained in an `AnnData` object that is stored as an `.h5ad` file locally. Then users can load the data into Python environment using `scanpy` package:
 
 ```python
-import pyPlotSimplex as ps
+import CytoSimplex as csx
 import scanpy as sc
 
 adata = sc.read_h5ad("path/to/your/AnnData.h5ad")

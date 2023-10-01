@@ -2,7 +2,7 @@ import scanpy as sc
 import numpy as np
 import pandas as pd
 import pytest
-from pyPlotSimplex import row_normalize, select_top_features, \
+from CytoSimplex import row_normalize, select_top_features, \
     plot_binary, plot_ternary, plot_quaternary
 import matplotlib.pyplot as plt
 from unittest.mock import patch

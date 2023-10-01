@@ -1,16 +1,16 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='pyPlotSimplex',
+    name='CytoSimplex',
     version='0.1.0',
     author=['Yichen Wang', 'Jialin Liu'],
     author_email='wayichen@umich.edu',
-    description="""pyPlotSimplex is module that creates simplex plot showing
+    description="""CytoSimplex is module that creates simplex plot showing
                    similarity between single-cells and clusters, while being
                    able to add velocity as another layer of information""",
     # long_description='A longer description of your project',
     long_description_content_type='text/markdown',
-    url='https://github.com/mvfki/pyPlotSimplex',
+    url='https://github.com/mvfki/pyCytoSimplex',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     install_requires=[
@@ -40,6 +40,6 @@ setup(
     ],
     keywords='python package distribution',
     project_urls={
-        'Source': 'https://github.com/mvfki/pyPlotSimplex',
+        'Source': 'https://github.com/mvfki/pyCytoSimplex',
     },
 )
