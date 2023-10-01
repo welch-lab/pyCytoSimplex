@@ -3,8 +3,6 @@
 # CytoSimplex 
 [![Python3_10_test](https://github.com/mvfki/pyCytoSimplex/actions/workflows/python-package.yml/badge.svg)](https://github.com/mvfki/pyCytoSimplex/actions/workflows/python-package.yml)[![codecov](https://codecov.io/gh/mvfki/pyCytoSimplex/branch/main/graph/badge.svg?token=L839lYPVon)](https://codecov.io/gh/mvfki/pyCytoSimplex)[![AnnData-0.9.1](https://img.shields.io/badge/AnnData-0.9.1-blue)](https://pypi.org/project/anndata/)
 
-# CytoSimplex
-
 "CytoSimplex" is a Python module that creates simplex plot showing similarity between single-cells and terminals represented by clusters of cells.
 RNA velocity can be added as another layer of information.
 
