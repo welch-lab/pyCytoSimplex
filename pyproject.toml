@@ -1,0 +1,92 @@
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core >=3.8.0,<4"]
+
+[project]
+name = "CytoSimplex"
+description = "Simplex Visualization of Cell Fate Similarity in Single-Cell Data"
+version = "0.1.0"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Yichen Wang"},
+    {name = "Jialin Liu"},
+    {name = "Joshua D. Welch"}
+]
+maintainers = [
+    {name = "Yichen Wang", email = "wayichen@umich.edu"}
+]
+readme = {file = "README.md", content-type="text/markdown"}
+classifiers = [
+    'Development Status :: 2 - Pre-Alpha',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Science/Research',
+    'Intended Audience :: Education',
+    'Intended Audience :: Healthcare Industry',
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Natural Language :: English',
+    'Operating System :: MacOS',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: POSIX :: Linux',
+    'Topic :: Scientific/Engineering :: Bio-Informatics',
+    'Topic :: Scientific/Engineering :: Visualization',
+]
+dependencies = [
+    'scikit-learn',
+    'numpy',
+    'anndata',
+    'scipy',
+    'pandas',
+    'matplotlib',
+    'mpltern'
+]
+
+[project.urls]
+# Documentation = "https://CytoSimplex.readthedocs.io/"
+Source = "https://github.com/mvfki/pyCytoSimplex"
+
+[project.optional-dependencies]
+test-min = [
+    "pytest>=4.4",
+    "pytest-nunit",
+    "pytest-mock",
+    # "profimp",
+]
+test = [
+    "CytoSimplex[test-min]"
+]
+doc = [
+    "sphinx>=4.4,<5", # remove upper bound when theme supports dark mode
+    "sphinx-book-theme",
+    "scanpydoc>=0.9.5",
+    "sphinx-autodoc-typehints",
+    "myst-parser",
+    "myst-nb",
+    "sphinx-design",
+    "sphinxext-opengraph", # for nice cards when sharing on social
+    "sphinx-copybutton",
+    "nbsphinx",
+    "matplotlib!=3.6.1",
+]
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report html --cov-fail-under 95"
+testpaths = ["src/CytoSimplex/tests"]
+xfail_strict = true
+markers = [
+    "internet: tests which rely on internet resources (enable with `--internet-tests`)",
+]
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.pylint]
+disable = [
+    # module imported but unused
+    "W0611",
+]

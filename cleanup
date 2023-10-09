@@ -1,0 +1,13 @@
+rm -rf build
+rm -rf dist
+rm -rf htmlcov
+rm -rf src/CytoSimplex.egg-info
+rm -rf src/CytoSimplex/__pycache__
+rm -rf src/CytoSimplex/tests/__pycache__
+rm src/CytoSimplex/tests/.coverage
+rm -rf .pytest_cache
+
+cd docs
+make clean
+cd ..
+

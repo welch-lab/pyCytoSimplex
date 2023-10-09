@@ -1,38 +1,39 @@
-from .similarity import calc_sim
-from .normalize import row_normalize
-from .util import _check_cluster_vertices
+from ._similarity import calc_sim
+from ._normalize import row_normalize
+from ._util import _check_cluster_vertices
 import numpy as np
 import matplotlib.pyplot as plt
 import mpltern
 import math
 from anndata import AnnData
 from scipy.stats import gaussian_kde
+from scipy.sparse import csr_matrix
+import pandas as pd
+from typing import Optional, Union, Tuple
 
 
 def plot_binary(
-          X,
-          cluster_var,
-          vertices,
-          features=None,
-          save_fig=False,
-          fig_path="plot_binary.png",
-          fig_size=None,
-          processed=False,
-          method="euclidean",
-          force=False,
-          sigma=0.08,
-          scale=True,
-          title=None,
-          split_cluster=False,
-          cluster_title=True,
-          dot_color="#8E8E8EFF",
-          n_velogrid=10,
-          radius=0.08,
-          dot_size=0.6,
-          vertex_colors=["#3B4992FF", "#EE0000FF"],
-          vertex_label_size=12,
-          gridline_alpha=0.4,
-          ):
+          x: Union[AnnData, np.ndarray, csr_matrix],
+          cluster_var: Union[str, list, pd.Series],
+          vertices: Union[list, dict],
+          features: Optional[list[str]] = None,
+          save_fig: bool = False,
+          fig_path: str = "plot_binary.png",
+          fig_size: Optional[Tuple[int, int]] = None,
+          processed: bool = False,
+          method: str = "euclidean",
+          force: bool = False,
+          sigma: float = 0.08,
+          scale: bool = True,
+          title: Optional[str] = None,
+          split_cluster: bool = False,
+          cluster_title: bool = True,
+          dot_color: bool = "#8E8E8EFF",
+          dot_size: float = 0.6,
+          vertex_colors: list[str, str] = ["#3B4992FF", "#EE0000FF"],
+          vertex_label_size: int = 12,
+          gridline_alpha: float = 0.4,
+          ) -> None:
     """
     Create binary plot that shows the similarity between each single cell and
     the two vertices of a simplex (two-ended line) which represents specified
@@ -43,89 +44,110 @@ def plot_binary(
 
     Parameters
     ----------
-    X : AnnData, numpy.ndarray, or scipy.sparse.csr_matrix
-        The expression matrix of the single cells. Each row represents a single
-            cell and each column represents a gene.
-    cluster_var : str, list, or pd.Series
-        The cluster assignment of each single cell.
-        Only when `X` is AnnData, can be a str that specifies the name of the
-            cluster variable in `X.obs`.
-        list or pd.Series is accepted in all cases, and the length must equal
-            to `X.shape[0]`.
-    vertices : list or dict, where the length must equal to 2.
-        The terminal specifications of the simplex.
-        When list, each element must exist in the categories of `cluster_var`.
-        When dict, served as grouped specifications of the terminals, meaning
-            each terminal stands for one or more clusters. The values can be
-            either a str for a single cluster or a list of multiple clusters.
-    features : list, optional
-        The features to be used in the calculation of similarity. If None, all
-            features will be used.
-    save_fig : bool, optional
-        Whether to save the figure. Default: False.
-    fig_path : str, optional
-        The path to save the figure. Default: "plot_binary.png".
-    fig_size : tuple of two numbers, optional
+    x
+        Object that has the expression matrix of the single cells. Each row
+        represents a single cell and each column represents a gene.
+    cluster_var
+        The cluster assignment of each single cell. If `x` is an
+        :class:`anndata.AnnData`, `cluster_var` can be a `str` that specifies
+        the name of the cluster variable in `x.obs`. `list` or
+        :class:`pandas.Series` is accepted in all cases, and the length must
+        equal to `x.shape[0]`.
+    vertices
+        The terminal specifications. Should have exactly 2 elements for the
+        1-simplex (binary simplex / ended line). Acceptable input include:
+
+        - A :class:`list` of 2 :class:`str` that exist in the categories of
+          `cluster_var`.
+        - A :class:`dict` of 2 keys. The keys are presented as customizable
+          vertex names. The corresponding value for each key can be either a
+          :class:`str` for a single cluster, or a :class:`list` of :class:`str`
+          for grouped vertex of multiple clusters.
+    features
+        The features to be used in the calculation of similarity. It is
+        recommended to derive this list with
+        :func:`~CytoSimplex.select_top_features`. Default uses all features.
+    save_fig
+        Whether to save the figure.
+    fig_path
+        The path to save the figure.
+    fig_size
         The size of the figure. The first number for width and the second for
-            height. Default: None.
-    processed : bool, optional
+        height.
+    processed
         Whether the input matrix is already processed. When `False`, a raw
-            count matrix (with integers) is recommended and preprocessing of
-            library-size normalization, scaled log1p transformation will happen
-            internally. If `True`, the input matrix will directly be used for
-            computing the similarity. Default: False.
-    method : str, choose from "euclidean", "cosine", "pearson", or "spearman".
-        The method to calculate the similarity. Default: "euclidean".
-        When "euclidean" or "cosine", the similarity is converted from the
-            distance with a Gaussian kernel.
-        When "pearson" or "spearman", the similarity is derived as the
-            correlation is.
-    force : bool
+        count matrix (with integers) is recommended and preprocessing of
+        library-size normalization, scaled log1p transformation will happen
+        internally. If `True`, the input matrix will directly be used for
+        computing the similarity.
+    method
+        Choose from `"euclidean"`, `"cosine"`, `"pearson"` and `"spearman"`.
+        When `"euclidean"` or `"cosine"`, the similarity is converted from the
+        distance with a Gaussian kernel and the argument `sigma` would be
+        applied. When `"pearson"` or `"spearman"`, the similarity is derived as
+        the correlation is.
+    force
         Whether to force the calculation when the number of features exceeds
-            500. Default: False.
-    sigma : float
-        The sigma parameter in the Gaussian kernel. Default: 0.08.
-    scale : bool
-        Whether to scale the similarity matrix by vertices. Default: True.
-    title : str
-        The title of the plot. Not used when `split_cluster=True`. Default:
-            None.
-    split_cluster : bool
-        Whether to split the plot by clusters. If False (default), all cells
-            will be plotted in one plot. If True, the cells will be split by
-            clusters and each cluster will be plotted in one subplot.
-    cluster_title : bool
+        500.
+    sigma
+        The sigma parameter in the Gaussian kernel that converts the distance
+        metrics into similarity.
+    scale
+        Whether to scale the similarity matrix by vertices.
+    title
+        The title of the plot. Not used when `split_cluster=True`.
+    split_cluster
+        Whether to split the plot by clusters. If `False`, all cells will be
+        plotted in one plot. If `True`, the cells will be split by clusters and
+        each cluster will be plotted in one subplot.
+    cluster_title
         Whether to show the cluster name as the title of each subplot when
-            `split_cluster=True`. Default: True.
-    dot_color : str
-        The color of the dots. Default: "#8E8E8EFF".
-    dot_size : float
-        The size of the dots. Default: 0.6.
-    vertex_colors : list of two str
+        `split_cluster=True`.
+    dot_color
+        The color of the dots.
+    dot_size
+        The size of the dots.
+    vertex_colors
         The colors of the vertex labels, grid lines, axis labels and arrows.
-            Default: `["#3B4992FF", "#EE0000FF"]`, respectively
-            for right and left vertices.
-    vertex_label_size : int
-        The size of the vertex labels. Default: 12.
-    gridline_alpha : float
-        The alpha of the gridlines. Default: 0.4.
+    vertex_label_size
+        The size of the vertex labels.
+    gridline_alpha
+        The alpha of the gridlines.
 
     Returns
     -------
-    None. Figure will be shown or saved.
+        Figure will be shown or saved.
+
+    Examples
+    --------
+
+    .. plot::
+        :context: close-figs
+
+        import CytoSimplex as csx
+        import scanpy as sc
+        adata = sc.read(
+            filename="test.h5ad",
+            backup_url="https://figshare.com/ndownloader/files/41034857"
+        )
+        vertices = {"OS": ["Osteoblast_1", "Osteoblast_2", "Osteoblast_3"],
+                    "RE": ["Reticular_1", "Reticular_2"]}
+        gene = csx.select_top_features(adata, "cluster", vertices)
+        csx.plot_binary(adata, "cluster", vertices, gene)
+
     """
     # Useless call of mpltern function to avoid warning.
     mpltern_np_ver = mpltern.version("numpy")
     del mpltern_np_ver
     mat, grouping, vertices, original_cluster = \
-        _check_cluster_vertices(X, cluster_var, vertices, n=2)
+        _check_cluster_vertices(x, cluster_var, vertices, n=2)
     if not processed:
         mat = row_normalize(mat)
         mat *= 10000
         mat = np.log1p(mat)
     if features is not None:
-        if isinstance(X, AnnData):
-            features = X.var_names.isin(features)
+        if isinstance(x, AnnData):
+            features = x.var_names.isin(features)
         mat = mat[:, features]
 
     sim_mat = calc_sim(mat=mat, cluster_var=grouping, vertices=vertices,

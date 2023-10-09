@@ -1,0 +1,5 @@
+0.1.0 :small:`2023-10-??`
+"""""""""""""""""""""""""""""""
+
+- Initial release of the Python module.
+- Implemented the functions to visualize the data in 1-/2-/3-simplex.

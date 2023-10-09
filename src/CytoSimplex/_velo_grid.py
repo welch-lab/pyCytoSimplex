@@ -1,4 +1,4 @@
-from .util import TRIANGLE_VERTICES, TETRA_VERTICES
+from ._util import TRIANGLE_VERTICES, TETRA_VERTICES
 from scipy.sparse import csr_matrix
 import pandas as pd
 import numpy as np

@@ -1,8 +1,0 @@
-scikit-learn
-numpy
-anndata
-scipy
-pandas
-mpltern
-matplotlib
-scanpy
