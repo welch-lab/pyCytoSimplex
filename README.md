@@ -1,12 +1,13 @@
-<img src="docs/images/logo.png" align="right" width="120" />
+<img src="docs/images/logo_bright.png" align="right" width="120" />
 
 # CytoSimplex
-[![Python3_10_test](https://github.com/mvfki/pyCytoSimplex/actions/workflows/python-package.yml/badge.svg)](https://github.com/mvfki/pyCytoSimplex/actions/workflows/python-package.yml)[![codecov](https://codecov.io/gh/mvfki/pyCytoSimplex/branch/main/graph/badge.svg?token=L839lYPVon)](https://codecov.io/gh/mvfki/pyCytoSimplex)[![AnnData-0.9.1](https://img.shields.io/badge/AnnData-0.9.1-blue)](https://pypi.org/project/anndata/)
+
+[![Python3_10_test](https://github.com/welch-lab/pyCytoSimplex/actions/workflows/python-package.yml/badge.svg)](https://github.com/welch-lab/pyCytoSimplex/actions/workflows/python-package.yml)[![codecov](https://codecov.io/gh/mvfki/pyCytoSimplex/branch/main/graph/badge.svg?token=L839lYPVon)](https://codecov.io/gh/mvfki/pyCytoSimplex)[![AnnData-0.9.1](https://img.shields.io/badge/AnnData-0.9.1-blue)](https://pypi.org/project/anndata/)
 
 "CytoSimplex" is a Python module that creates simplex plot showing similarity between single-cells and terminals represented by clusters of cells.
 RNA velocity can be added as another layer of information.
 
-For R users, we have an R package [CytoSimplex](https://github.com/mvfki/CytoSimplex) that provides the same functionalities.
+For R users, we have an R package [CytoSimplex](https://github.com/welch-lab/CytoSimplex) that provides the same functionalities.
 
 ## Installation
 
@@ -15,7 +16,7 @@ For latest developmental version, please make sure that you have a Python (>=3.7
 1. Download this package
 
 ```shell
-git clone https://github.com/mvfki/pyCytoSimplex.git
+git clone https://github.com/welch-lab/pyCytoSimplex.git
 cd pyCytoSimplex
 ```
 
