@@ -110,7 +110,7 @@ html_theme_options = {
 html_title = "CytoSimplex"
 html_static_path = ['_static']
 html_css_files = ["css/override.css"]
-master_doc = 'source/index'
+master_doc = 'index'
 
 intersphinx_mapping = dict(
     anndata=('https://anndata.readthedocs.io/en/stable/', None),

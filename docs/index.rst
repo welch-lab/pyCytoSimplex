@@ -22,7 +22,7 @@ in the simplex, we can visualize the similarity of each cell to each terminal ce
 this method of simplex cell fate visualization in our study of bone marrow endosteal stem cells [1]_.
 We generalized this method to also 1-simplex (a two-ended line) and 3-simplex (a tetrahedron).
 
-.. image:: ../images/bmmc_example.png
+.. image:: images/bmmc_example.png
    :width: 400
    :alt: bmmc
    :align: center

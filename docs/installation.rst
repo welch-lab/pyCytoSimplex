@@ -34,6 +34,7 @@ Python virtual environment
 If users choose not to work with conda, a Python virtual environment, alternatively, can be created with:
 
 .. code-block:: bash
+
       # If you have never tried a virtual environment before, you'll need to install the dependency first
       python -m venv cytosimplex
       # This line creates the virtual environment
