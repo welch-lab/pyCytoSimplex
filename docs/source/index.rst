@@ -20,7 +20,7 @@ we denote each of the three vertices as a presentation of a certain terminal cel
 between each cell to each terminal. By converting the similarity to the three vertices into a triplet of barycentric coordinates
 in the simplex, we can visualize the similarity of each cell to each terminal cell fate in a 2D plot. We initially proposed
 this method of simplex cell fate visualization in our study of bone marrow endosteal stem cells [1]_.
-We generalized this method to also 1-simplex (a two-ended line) and 3-simplex (a tetrahedron) (**TODO** another footnote after the paper comes out).
+We generalized this method to also 1-simplex (a two-ended line) and 3-simplex (a tetrahedron).
 
 .. image:: ../images/bmmc_example.png
    :width: 400
