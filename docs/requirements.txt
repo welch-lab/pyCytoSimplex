@@ -4,6 +4,7 @@ sphinx-autodoc-typehints
 sphinx_design
 sphinxext-opengraph
 nbsphinx
+sphinx-book-theme
 scikit-learn
 numpy
 anndata
