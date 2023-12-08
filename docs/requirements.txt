@@ -1,0 +1,8 @@
+myst-nb
+scikit-learn
+numpy
+anndata
+scipy
+pandas
+matplotlib
+mpltern
