@@ -1,4 +1,9 @@
 myst-nb
+sphinx-copybutton
+sphinx-autodoc-typehints
+sphinx_design
+sphinxext-opengraph
+nbsphinx
 scikit-learn
 numpy
 anndata
