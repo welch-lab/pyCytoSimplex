@@ -41,7 +41,8 @@ dependencies = [
     'scipy',
     'pandas',
     'matplotlib',
-    'mpltern'
+    'mpltern',
+    'scanpy'
 ]
 
 [project.urls]
