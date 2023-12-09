@@ -32,6 +32,9 @@ def plot_quaternary(
           dot_color: str = "#8E8E8EFF",
           n_velogrid: int = 10,
           radius: float = 0.16,
+          elev: float = 5,
+          azim: float = 10,
+          roll: float = 0,
           dot_size: float = 0.6,
           vertex_colors: list[str, str, str, str] = ["#3B4992FF", "#EE0000FF",
                                                      "#008B45FF", "#631879FF"],
@@ -41,7 +44,12 @@ def plot_quaternary(
     """
     Create ternary plot that shows the similarity between each single cell and
     the four vertices of a simplex (tetrahedron) which represents specified
-    clusters. Velocity information can be added to the plot.
+    clusters. Velocity information can be added to the plot. The view angle of
+    the plot can be adjusted via `elev`, `azim` and `roll`. When in an
+    interactive session, the plot shown in pop-out window is interactive.
+    If an interactive view is desired, Jupyter Notebook users will need to have
+    package “ipympl” pre-installed and add the line `%matplotlib widget` at the
+    top of the code block.
 
     Parameters
     ----------
@@ -116,6 +124,12 @@ def plot_quaternary(
         aggregate the velocity of cells falling into each grid.
     radius
         Scaling factor of aggregated velocity to get the arrow length.
+    elev
+        The elevation angle in the z plane.
+    azim
+        The azimuth angle in the x,y plane.
+    roll
+        The roll angle in the x,y plane.
     dot_size
         The size of the dots.
     vertex_colors
@@ -176,6 +190,7 @@ def plot_quaternary(
             fig_size = (6, 6)
         fig = plt.figure(figsize=fig_size)
         ax = plt.subplot(projection="3d")
+        ax.view_init(elev=elev, azim=azim, roll=roll)
         _add_quaternary_subplot(ax, sim_mat, velo_mat=velo_mat,
                                 dot_color=dot_color, n_velogrid=n_velogrid,
                                 radius=radius, dot_size=dot_size,
@@ -198,6 +213,7 @@ def plot_quaternary(
                 velo_mat_sub = None
             ax = fig.add_subplot(subplot_nrow, subplot_ncol, i + 1,
                                  projection="3d")
+            ax.view_init(elev=elev, azim=azim, roll=roll)
             _add_quaternary_subplot(
                 ax,
                 sim_mat.loc[original_cluster == cluster, :],

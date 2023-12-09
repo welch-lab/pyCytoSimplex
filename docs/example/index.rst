@@ -20,9 +20,9 @@ generated in our previous study [1]_. The data is stored in a ``.h5ad`` file for
 .. code-block:: python
 
     import CytoSimplex as csx
-    import anndata
-    adata = anndata.read(filename='test.h5ad',
-                         backup_url="https://figshare.com/ndownloader/files/41034857")
+    import scanpy as sc
+    adata = sc.read(filename='test.h5ad',
+                    backup_url="https://figshare.com/ndownloader/files/41034857")
 
 The contents included in the ``adata`` object include:
 
