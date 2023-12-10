@@ -69,10 +69,11 @@ This Python module can be locally installed with the following command in shell/
 
 .. code-block:: bash
 
+      pip install cytosimplex
+
+For the latest development version, users can install the module directly from GitHub with:
+
+.. code-block:: bash
       pip install git+https://github.com/welch-lab/pyCytoSimplex.git
-
-This command automatically fetches the latest version in this GitHub repository and installs it in the current active environment.
-
-This module will be submitted to PyPI for easier installation in the future.
 
 If you have any problems, please `open an issue on GitHub <https://github.com/mvfki/pyCytoSimplex/issues/new>`_.
