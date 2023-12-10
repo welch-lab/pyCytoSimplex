@@ -9,6 +9,12 @@ RNA velocity can be added as another layer of information.
 
 For R users, we have an R package [CytoSimplex](https://github.com/welch-lab/CytoSimplex) that provides the same functionalities.
 
+CytoSimplex can be installed with the shell/command-line command:
+
+```bash
+pip install cytosimplex
+```
+
 We have build a [documentation website](https://pycytosimplex.readthedocs.io/en/latest/index.html) for:
 - [Detailed instruction for installation](https://pycytosimplex.readthedocs.io/en/latest/installation.html)
 - [Walkthrough example from loading data to creating different simplex visualization](https://pycytosimplex.readthedocs.io/en/latest/example/index.html)
