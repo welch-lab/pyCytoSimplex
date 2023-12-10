@@ -18,14 +18,10 @@ maintainers = [
 ]
 readme = {file = "README.md", content-type="text/markdown"}
 classifiers = [
-    'Development Status :: 2 - Pre-Alpha',
+    'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
     'Intended Audience :: Science/Research',
     'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Natural Language :: English',
     'Operating System :: MacOS',
@@ -46,7 +42,7 @@ dependencies = [
 ]
 
 [project.urls]
-# Documentation = "https://CytoSimplex.readthedocs.io/"
+Documentation = "https://cytosimplex.readthedocs.io/en/latest/"
 Source = "https://github.com/welch-lab/pyCytoSimplex"
 
 [project.optional-dependencies]
