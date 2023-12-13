@@ -31,6 +31,20 @@ This site presents the documentation of the Python package "CytoSimplex". We dev
 transcriptomic data (scRNAseq) and chromatin accessibility data (scATACseq). Meanwhile, RNA velocity can be added as another
 layer of information, as the arrows shown in the example plot above.
 
+If you use CytoSimplex in your research, please cite our paper:
+
+.. code-block:: latex
+
+   @article{liu2023CytoSimplex,
+      author = {Jialin Liu and Yichen Wang and Chen Li and Yichen Gu and Noriaki Ono and Joshua D. Welch},
+      title = {CytoSimplex: Visualizing Single-cell Fates and Transitions on a Simplex},
+      year = {2023},
+      doi = {10.1101/2023.12.07.570655},
+      publisher = {Cold Spring Harbor Laboratory},
+      URL = {https://www.biorxiv.org/content/early/2023/12/08/2023.12.07.570655},
+      journal = {bioRxiv}
+   }
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
