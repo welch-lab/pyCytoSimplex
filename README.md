@@ -18,3 +18,7 @@ pip install cytosimplex
 We have build a [documentation website](https://pycytosimplex.readthedocs.io/en/latest/index.html) for:
 - [Detailed instruction for installation](https://pycytosimplex.readthedocs.io/en/latest/installation.html)
 - [Walkthrough example from loading data to creating different simplex visualization](https://pycytosimplex.readthedocs.io/en/latest/example/index.html)
+
+If you used CytoSimplex in your work, please cite the following work:
+
+>[Jialin Liu, Yichen Wang, Chen Li, Yichen Gu, Noriaki Ono and Joshua D. Welch, CytoSimplex: Visualizing Single-cell Fates and Transitions on a Simplex, 2023, bioRxiv](https://doi.org/10.1101/2023.12.07.570655)
